@@ -48,9 +48,9 @@ publishing {
 
             pom {
 
-                name = 'mars-validated'
-                description = 'mars-validated 参数验证 https://github.com/fashionbrot/mars-validated'
-                url = 'https://github.com/fashionbrot/mars-validated.git'
+                name = 'mars-util'
+                description = '各种java 工具'
+                url = 'https://github.com/fashionbrot/mars-common.git'
                 packaging 'jar'
 
                 licenses {
@@ -67,9 +67,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection = 'scm:git:git://github.com/fashionbrot/mars-validated.git'
-                    developerConnection = 'scm:git:ssh://github.com/fashionbrot/mars-validated.git'
-                    url = 'https://github.com/fashionbrot/mars-validated.git'
+                    connection = 'scm:git:git://github.com/fashionbrot/mars-common.git'
+                    developerConnection = 'scm:git:ssh://github.com/fashionbrot/mars-common.git'
+                    url = 'https://github.com/fashionbrot/mars-common.git'
                 }
 
                 withXml {
@@ -119,6 +119,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
+    implementation 'com.auth0:java-jwt:4.0.0'
     implementation 'org.slf4j:slf4j-api:1.7.10'
     implementation 'javax.servlet:javax.servlet-api:3.0.1'
 
