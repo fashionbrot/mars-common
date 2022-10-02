@@ -1,0 +1,3 @@
+rootProject.name = 'mars-common'
+include 'mars-util'
+
