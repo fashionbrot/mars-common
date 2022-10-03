@@ -1,3 +1,4 @@
 rootProject.name = 'mars-common'
 include 'mars-util'
+include 'mars-jwt'
 

@@ -233,24 +233,24 @@ public class RsaUtil {
     }
 
 
-    public static void main(String[] args) throws Exception {
-        Map<String, String> stringStringMap = genKeyPairMap(512);
-
-        System.out.println(stringStringMap);
-
-
-        String encrypt = encrypt(new String("{张三哦}".getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8), stringStringMap.get("public"));
-        System.out.println("encrypt:" + encrypt);
-        String decrypt = decrypt(encrypt, stringStringMap.get("private"));
-        System.out.println("decrypt:" + decrypt);
-
-
-        KeyPair keyPair = genKeyPair(512);
-        String encrypt1 = encrypt(keyPair, "{张三哦}");
-        System.out.println("encrypt1:"+encrypt1);
-        String decrypt1 = decrypt(keyPair, encrypt1);
-        System.out.println("decrypt1:"+decrypt1);
-
-    }
+//    public static void main(String[] args) throws Exception {
+//        Map<String, String> stringStringMap = genKeyPairMap(512);
+//
+//        System.out.println(stringStringMap);
+//
+//
+//        String encrypt = encrypt(new String("{张三哦}".getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8), stringStringMap.get("public"));
+//        System.out.println("encrypt:" + encrypt);
+//        String decrypt = decrypt(encrypt, stringStringMap.get("private"));
+//        System.out.println("decrypt:" + decrypt);
+//
+//
+//        KeyPair keyPair = genKeyPair(512);
+//        String encrypt1 = encrypt(keyPair, "{张三哦}");
+//        System.out.println("encrypt1:"+encrypt1);
+//        String decrypt1 = decrypt(keyPair, encrypt1);
+//        System.out.println("decrypt1:"+decrypt1);
+//
+//    }
 
 }

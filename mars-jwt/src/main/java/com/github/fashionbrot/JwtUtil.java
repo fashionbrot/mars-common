@@ -1,13 +1,11 @@
 package com.github.fashionbrot;
 
 
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.github.fashionbrot.encrypt.AesUtil;
 import com.github.fashionbrot.encrypt.RsaUtil;
 import com.github.fashionbrot.enums.AlgorithmEnum;
 
@@ -16,7 +14,6 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 

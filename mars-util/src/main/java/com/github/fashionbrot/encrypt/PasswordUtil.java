@@ -7,12 +7,12 @@ import java.util.UUID;
 
 public class PasswordUtil {
 
-    public static void main(String[] args){
-        //be3ce882f406df824ac7e2bced77fcf2
-        String uuid = "3d76917c8c6e48259dbb48deba993a59";//getSalt();
-        String pwd="test";
-        System.out.println(encryptPassword(pwd,uuid));
-    }
+//    public static void main(String[] args){
+//        //be3ce882f406df824ac7e2bced77fcf2
+//        String uuid = "3d76917c8c6e48259dbb48deba993a59";//getSalt();
+//        String pwd="test";
+//        System.out.println(encryptPassword(pwd,uuid));
+//    }
 
 
     public static String getSalt(){

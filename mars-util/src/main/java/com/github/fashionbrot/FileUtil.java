@@ -410,12 +410,12 @@ public class FileUtil {
 
 
 
-    public static void main(String[] args) {
-       /* String p="E:\\dev\\ideaProject\\config-test\\spring-mvc-config\\src\\main\\resources";
-        boolean b=searchFile(p,"application");
-        System.out.println(b);*/
-
-    }
+//    public static void main(String[] args) {
+//       /* String p="E:\\dev\\ideaProject\\config-test\\spring-mvc-config\\src\\main\\resources";
+//        boolean b=searchFile(p,"application");
+//        System.out.println(b);*/
+//
+//    }
 
 
 

@@ -585,9 +585,9 @@ public class ObjectUtil {
         return false;
     }
 
-    public static void main(String[] args) {
-        Charset us_ascii = Charset.forName("UTF-8");
-        System.out.println(us_ascii.displayName());
-    }
+//    public static void main(String[] args) {
+//        Charset us_ascii = Charset.forName("UTF-8");
+//        System.out.println(us_ascii.displayName());
+//    }
 
 }

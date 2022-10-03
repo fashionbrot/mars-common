@@ -66,10 +66,10 @@ public class SystemUtil {
         return address;
     }
 
-    public static void main(String[] args) {
-        System.out.println(SystemUtil.getHostAddress());
-        System.out.println(getLastPoint("172.16.18.197"));
-        System.out.println(getLastPoint());
-    }
+//    public static void main(String[] args) {
+//        System.out.println(SystemUtil.getHostAddress());
+//        System.out.println(getLastPoint("172.16.18.197"));
+//        System.out.println(getLastPoint());
+//    }
 
 }

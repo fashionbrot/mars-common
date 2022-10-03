@@ -118,10 +118,7 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
-    implementation 'com.auth0:java-jwt:4.0.0'
     implementation 'org.slf4j:slf4j-api:1.7.10'
-    implementation 'javax.servlet:javax.servlet-api:3.0.1'
 
 }
 

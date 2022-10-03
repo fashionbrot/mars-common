@@ -320,19 +320,19 @@ public class HttpClientUtil {
     }
 
 
-    public static void main(String[] args) {
-        Map<String,Object> map=new HashMap<>();
-        map.put("1","1");
-        map.put("test",2);
-        map.put("test2",212321);
-        System.out.println(encodingParams(map));
-        Map<String,Object> h=new HashMap<>();
-        h.put("sec-ch-ua","\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\"");
-        h.put("sec-ch-ua-mobile","?0");
-        h.put("Upgrade-Insecure-Requests","1");
-        h.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36");
-
-        HttpResult httpResult = httpGet("https://m.weibo.cn/search?containerid=100103type%3D1%26q%3D%E5%A6%87%E5%B9%BC%E4%BF%9D%E5%81%A5%E5%B8%88","utf-8",h,2000,2000);
-        System.out.println(httpResult.toString());
-    }
+//    public static void main(String[] args) {
+//        Map<String,Object> map=new HashMap<>();
+//        map.put("1","1");
+//        map.put("test",2);
+//        map.put("test2",212321);
+//        System.out.println(encodingParams(map));
+//        Map<String,Object> h=new HashMap<>();
+//        h.put("sec-ch-ua","\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\"");
+//        h.put("sec-ch-ua-mobile","?0");
+//        h.put("Upgrade-Insecure-Requests","1");
+//        h.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36");
+//
+//        HttpResult httpResult = httpGet("https://m.weibo.cn/search?containerid=100103type%3D1%26q%3D%E5%A6%87%E5%B9%BC%E4%BF%9D%E5%81%A5%E5%B8%88","utf-8",h,2000,2000);
+//        System.out.println(httpResult.toString());
+//    }
 }

@@ -453,7 +453,7 @@ public class BigDecimalUtil {
         return v.setScale(scale,RoundingMode.HALF_UP).doubleValue();
     }
 
-    public static void main(String[] args) {
-        System.out.println(divideDouble(1161.33D,3.498,1));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(divideDouble(1161.33D,3.498,1));
+//    }
 }

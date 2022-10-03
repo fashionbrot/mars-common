@@ -128,20 +128,20 @@ public class AesUtil {
         return result;
     }
 
-    public static void main(String[] args) {
-        String key = "q!w@e#r$t%Y^UIOP";
-        String str = "张三";
-        System.out.println(str);
-        String encrypt = encryptString(str, key);
-        System.out.println(encrypt);
-        String decrypt = decryptString(encrypt, key);
-        System.out.println(decrypt);
-
-        String salt = NanoIdUtil.randomNanoId(32);
-        System.out.println("salt:"+salt);
-        String password = "12345";
-        String encryptPassword = AesUtil.encryptString(password, salt);
-        System.out.println("encryptPassword:"+encryptPassword);
-
-    }
+//    public static void main(String[] args) {
+//        String key = "q!w@e#r$t%Y^UIOP";
+//        String str = "张三";
+//        System.out.println(str);
+//        String encrypt = encryptString(str, key);
+//        System.out.println(encrypt);
+//        String decrypt = decryptString(encrypt, key);
+//        System.out.println(decrypt);
+//
+//        String salt = NanoIdUtil.randomNanoId(32);
+//        System.out.println("salt:"+salt);
+//        String password = "12345";
+//        String encryptPassword = AesUtil.encryptString(password, salt);
+//        System.out.println("encryptPassword:"+encryptPassword);
+//
+//    }
 }
