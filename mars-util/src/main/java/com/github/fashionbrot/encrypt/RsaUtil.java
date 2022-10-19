@@ -33,6 +33,7 @@ public class RsaUtil {
     /**
      * 随机生成密钥对
      * @param keySize  keySize 512 1024
+     * @param seed seed
      * @return  KeyPair
      */
     public static KeyPair genKeyPair(Integer keySize,byte[] seed) {
@@ -56,6 +57,7 @@ public class RsaUtil {
     /**
      * 随机生成密钥对
      * @param keySize   keySize 512 1024
+     * @param seed      seed
      * @return map
      */
     public static Map<String, String> genKeyPairMap(Integer keySize,byte[] seed) {

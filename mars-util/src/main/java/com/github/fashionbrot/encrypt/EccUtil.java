@@ -75,6 +75,7 @@ public class EccUtil {
     /**
      * 生产公钥私钥
      * @param keySize 长度  192、239、256、224、384、521
+     * @param seed seed
      * @return  KeyPair
      */
     public static KeyPair getKeyPair(int keySize,byte[] seed){
