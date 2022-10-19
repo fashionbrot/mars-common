@@ -27,6 +27,15 @@ public class RsaUtil {
      * @return  KeyPair
      */
     public static KeyPair genKeyPair(Integer keySize) {
+        return genKeyPair(keySize,null);
+    }
+
+    /**
+     * 随机生成密钥对
+     * @param keySize  keySize 512 1024
+     * @return  KeyPair
+     */
+    public static KeyPair genKeyPair(Integer keySize,byte[] seed) {
         // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象
         KeyPairGenerator keyPairGen = null;
         try {
@@ -34,11 +43,12 @@ public class RsaUtil {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        // 初始化密钥对生成器
-        keyPairGen.initialize(keySize, new SecureRandom());
-        // 生成一个密钥对，保存在keyPair中
+        if (ObjectUtil.isNotEmpty(seed)) {
+            keyPairGen.initialize(keySize, new SecureRandom(seed));
+        }else{
+            keyPairGen.initialize(keySize, new SecureRandom());
+        }
         KeyPair keyPair = keyPairGen.generateKeyPair();
-
         return keyPair;
     }
 
@@ -48,7 +58,7 @@ public class RsaUtil {
      * @param keySize   keySize 512 1024
      * @return map
      */
-    public static Map<String, String> genKeyPairMap(Integer keySize) {
+    public static Map<String, String> genKeyPairMap(Integer keySize,byte[] seed) {
         // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象
         KeyPairGenerator keyPairGen = null;
         try {
@@ -57,7 +67,7 @@ public class RsaUtil {
             e.printStackTrace();
         }
         // 初始化密钥对生成器
-        keyPairGen.initialize(keySize, new SecureRandom());
+        keyPairGen.initialize(keySize, ObjectUtil.isNotEmpty(seed)?new SecureRandom(seed):new SecureRandom());
         // 生成一个密钥对，保存在keyPair中
         KeyPair keyPair = keyPairGen.generateKeyPair();
         // 得到私钥
@@ -234,7 +244,7 @@ public class RsaUtil {
 
 
 //    public static void main(String[] args) throws Exception {
-//        Map<String, String> stringStringMap = genKeyPairMap(512);
+//        Map<String, String> stringStringMap = genKeyPairMap(512,"12345678".getBytes());
 //
 //        System.out.println(stringStringMap);
 //
@@ -245,7 +255,7 @@ public class RsaUtil {
 //        System.out.println("decrypt:" + decrypt);
 //
 //
-//        KeyPair keyPair = genKeyPair(512);
+//        KeyPair keyPair = genKeyPair(512,"12345678".getBytes());
 //        String encrypt1 = encrypt(keyPair, "{张三哦}");
 //        System.out.println("encrypt1:"+encrypt1);
 //        String decrypt1 = decrypt(keyPair, encrypt1);
