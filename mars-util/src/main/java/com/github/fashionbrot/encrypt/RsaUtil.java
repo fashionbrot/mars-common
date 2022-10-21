@@ -37,18 +37,13 @@ public class RsaUtil {
      * @return  KeyPair
      */
     public static KeyPair genKeyPair(Integer keySize,byte[] seed) {
-        // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象
         KeyPairGenerator keyPairGen = null;
         try {
             keyPairGen = KeyPairGenerator.getInstance("RSA");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        if (ObjectUtil.isNotEmpty(seed)) {
-            keyPairGen.initialize(keySize, new SecureRandom(seed));
-        }else{
-            keyPairGen.initialize(keySize, new SecureRandom());
-        }
+        keyPairGen.initialize(keySize,ObjectUtil.isNotEmpty(seed)? new SecureRandom(seed): new SecureRandom());
         KeyPair keyPair = keyPairGen.generateKeyPair();
         return keyPair;
     }
@@ -61,17 +56,8 @@ public class RsaUtil {
      * @return map
      */
     public static Map<String, String> genKeyPairMap(Integer keySize,byte[] seed) {
-        // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象
-        KeyPairGenerator keyPairGen = null;
-        try {
-            keyPairGen = KeyPairGenerator.getInstance("RSA");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        // 初始化密钥对生成器
-        keyPairGen.initialize(keySize, ObjectUtil.isNotEmpty(seed)?new SecureRandom(seed):new SecureRandom());
-        // 生成一个密钥对，保存在keyPair中
-        KeyPair keyPair = keyPairGen.generateKeyPair();
+
+        KeyPair keyPair =genKeyPair(keySize,seed);
         // 得到私钥
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
         // 得到公钥
@@ -83,15 +69,16 @@ public class RsaUtil {
 
         Map<String, String> keyMap = new HashMap<>(2);
         // 将公钥和私钥保存到Map
-        //0表示公钥
-        keyMap.put("public", publicKeyStr);
-        //1表示私钥
-        keyMap.put("private", privateKeyStr);
-
+        keyMap.put("publicKey", publicKeyStr);
+        keyMap.put("privateKey", privateKeyStr);
         return keyMap;
     }
 
-
+    /**
+     * 公钥 RSAPublicKey 转 String
+     * @param publicKey
+     * @return String
+     */
     public static String publicKeyToString(final RSAPublicKey publicKey) {
         if (publicKey == null) {
             return "";
@@ -99,6 +86,11 @@ public class RsaUtil {
         return Base64Util.encodeBase64String(publicKey.getEncoded());
     }
 
+    /**
+     * 私钥 RSAPrivateKey 转 字符串
+     * @param privateKey
+     * @return  String
+     */
     public static String privateKeyToString(final RSAPrivateKey privateKey) {
         if (privateKey == null) {
             return "";
@@ -148,7 +140,6 @@ public class RsaUtil {
     public static RSAPrivateKey convertPrivateKey(String privateKey){
         RSAPrivateKey priKey = null;
         if (ObjectUtil.isNotEmpty(privateKey)){
-            //base64编码的私钥
             byte[] decoded = Base64Util.decode(privateKey);
             try {
                 priKey = (RSAPrivateKey) KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(decoded));
@@ -165,7 +156,7 @@ public class RsaUtil {
     /**
      * RSA公钥加密
      *
-     * @param str       需要加密的字符串  UTF-8
+     * @param str       需要加密的字符串
      * @param publicKey 公钥
      * @return String密文
      */
@@ -173,7 +164,6 @@ public class RsaUtil {
         if (ObjectUtil.isEmpty(str)) {
             return "";
         }
-        //base64编码的公钥
         RSAPublicKey rsaPublicKey = convertPublicKey(publicKey);
         return encrypt(str,rsaPublicKey);
     }
@@ -181,29 +171,50 @@ public class RsaUtil {
     /**
      * RSA公钥加密
      *
-     * @param str       需要加密的字符串  UTF-8
-     * @param pubKey    公钥
-     * @return String密文
+     * @param str           需要加密的字符串
+     * @param publicKey    公钥
+     * @return String
      */
-    public static String encrypt(String str,RSAPublicKey pubKey){
+    public static String encrypt(String str,RSAPublicKey publicKey){
         //RSA加密
         if (ObjectUtil.isNotEmpty(str)){
-            try {
-                Cipher cipher = Cipher.getInstance("RSA");
-                cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-                return Base64Util.encodeBase64String(cipher.doFinal(str.getBytes(StandardCharsets.UTF_8)));
-            }catch (Exception e){
-                e.printStackTrace();
+            byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+            byte[] encrypt = encrypt(bytes, publicKey);
+            if (ObjectUtil.isNotEmpty(encrypt)){
+                return Base64Util.encodeBase64String(encrypt);
             }
         }
         return "";
     }
 
     /**
+     * RSA公钥加密
+     *
+     * @param bytes         bytes
+     * @param publicKey    公钥
+     * @return byte[]
+     */
+    public static byte[] encrypt(byte[] bytes,RSAPublicKey publicKey){
+        if (ObjectUtil.isNotEmpty(bytes)){
+            try {
+                Cipher cipher = Cipher.getInstance("RSA");
+                cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+                return cipher.doFinal(bytes);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+
+
+    /**
      * RSA私钥解密
      *
      * @param str        需要解密的字符串
-     * @param privateKey 私钥
+     * @param privateKey 私钥字符串
      * @return String名文
      */
     public static String decrypt(String str, String privateKey)  {
@@ -219,21 +230,38 @@ public class RsaUtil {
      * RSA私钥解密
      *
      * @param str        需要解密的字符串
-     * @param priKey 私钥
+     * @param privateKey 私钥
      * @return String名文
      */
-    public static String decrypt(String str, RSAPrivateKey priKey) {
+    public static String decrypt(String str, RSAPrivateKey privateKey) {
         if (ObjectUtil.isNotEmpty(str)){
             byte[] inputByte = Base64Util.decode(str.getBytes());
+            byte[] decrypt = decrypt(inputByte, privateKey);
+            if (ObjectUtil.isNotEmpty(decrypt)){
+                return new String(decrypt);
+            }
+        }
+        return "";
+    }
+
+    /**
+     * RSA私钥解密
+     *
+     * @param bytes         bytes
+     * @param privateKey    私钥
+     * @return byte[]
+     */
+    public static byte[] decrypt(byte[] bytes, RSAPrivateKey privateKey) {
+        if (ObjectUtil.isNotEmpty(bytes)){
             try {
                 Cipher cipher = Cipher.getInstance("RSA");
-                cipher.init(Cipher.DECRYPT_MODE, priKey);
-                return new String(cipher.doFinal(inputByte));
+                cipher.init(Cipher.DECRYPT_MODE, privateKey);
+                return cipher.doFinal(bytes);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
-        return "";
+        return null;
     }
 
 
